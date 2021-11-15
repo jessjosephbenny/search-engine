@@ -36,10 +36,21 @@ public class DBLP extends DefaultHandler {
 //	static File  INDEX_DIR = new File("D:\\MSc\\IRS\\citeseer2.tar\\Indexed");
 	static IndexWriter writer; // new IndexWriter(INDEX_DIR,new StandardAnalyzer(), true);
 	static int MIN_Length = 20;
+	
+	ArrayList<String> qNameList = new ArrayList<String>();
 
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (qName.equals("title")) {
 			isTitle = true;
+		}
+		if(!qNameList.contains(qName)) {
+			qNameList.add(qName);
+			System.out.println(qName);
+			for(int i=0;i<attributes.getLength();i++) {
+				System.out.println("qname: "+attributes.getQName(i));
+				System.out.println("type: "+attributes.getType(i));
+				System.out.println("value: "+attributes.getValue(i));
+			}
 		}
 	}
 
